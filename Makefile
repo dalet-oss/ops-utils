@@ -5,7 +5,7 @@ Q = $(if $(filter 1,$V),,@)
 M = $(shell printf "\033[34;1m▶\033[0m")
 
 .PHONY: all
-all: mod fmt vet lint ; @
+all: mod fmt vet check ; @
 	$Q echo "done"
 
 .PHONY: mod
@@ -20,6 +20,6 @@ fmt: ; $(info $(M) running go fmt…) @
 vet: ; $(info $(M) running go vet…) @
 	$Q go vet $(PKGS) ; exit 0
 
-.PHONY: lint
-lint: ; $(info $(M) running linter…) @
-	$Q go run golang.org/x/lint/golint -set_exit_status $(PKGS)
+.PHONY: check
+check: ; $(info $(M) running linter…) @
+	$Q go run honnef.co/go/tools/cmd/staticcheck@latest $(PKGS)
