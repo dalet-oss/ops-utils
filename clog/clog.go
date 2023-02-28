@@ -1,41 +1,96 @@
 package clog
 
 import (
+	"log"
+	"log/syslog"
 	"os"
 
 	"github.com/op/go-logging"
 )
 
-var logLevels = map[string]logging.Level{
-	"CRITICAL": logging.CRITICAL,
-	"ERROR":    logging.ERROR,
-	"WARNING":  logging.WARNING,
-	"NOTICE":   logging.NOTICE,
-	"INFO":     logging.INFO,
-	"DEBUG":    logging.DEBUG,
+// LoggerConfiguration defines custom configuration of a logging engine
+type LoggerConfiguration struct {
+	Type    string
+	Enabled bool
+	Level   string
+	File    string
 }
 
 var logger = logging.MustGetLogger("clog")
 
 // Init initializes the custom logger sub-system
-func Init(name, level string, debug bool) {
+func Init(name string, loggers []LoggerConfiguration) {
+
+	var logLevels = map[string]logging.Level{
+		"CRITICAL": logging.CRITICAL,
+		"ERROR":    logging.ERROR,
+		"WARNING":  logging.WARNING,
+		"NOTICE":   logging.NOTICE,
+		"INFO":     logging.INFO,
+		"DEBUG":    logging.DEBUG,
+	}
+
+	syslogLevels := map[string]syslog.Priority{
+		"CRITICAL": syslog.LOG_CRIT,
+		"ERROR":    syslog.LOG_ERR,
+		"WARNING":  syslog.LOG_WARNING,
+		"NOTICE":   syslog.LOG_NOTICE,
+		"INFO":     syslog.LOG_INFO,
+		"DEBUG":    syslog.LOG_DEBUG,
+	}
 
 	logger = logging.MustGetLogger(name)
-	backends := make([]logging.Backend, 0, 1)
 
-	consoleFmt := logging.MustStringFormatter(
-		`%{color} ▶ [%{level:.4s} %{id:05x}%{color:reset}] %{message}`,
-	)
-	console := logging.NewLogBackend(os.Stdout, "", 0)
-	consoleFormat := logging.NewBackendFormatter(console, consoleFmt)
-	consoleLevel := logging.AddModuleLevel(consoleFormat)
-	if debug {
-		consoleLevel.SetLevel(logging.DEBUG, "")
-	} else {
-		consoleLevel.SetLevel(logLevels[level], "")
+	backends := make([]logging.Backend, 0, len(loggers))
+	for _, l := range loggers {
+		if !l.Enabled {
+			continue
+		}
+		switch l.Type {
+		case "console":
+			// console logging
+			_, present := logLevels[l.Level]
+			if !present {
+				log.Fatalln("Unsupported log-level value for logger: ", l.Type, l.Level)
+			}
+			consoleFmt := logging.MustStringFormatter(
+				`%{color} ▶ %{level:.4s} %{id:05x}%{color:reset} %{message}`,
+			)
+			console := logging.NewLogBackend(os.Stdout, "", 0)
+			consoleFormat := logging.NewBackendFormatter(console, consoleFmt)
+			consoleLevel := logging.AddModuleLevel(consoleFormat)
+			consoleLevel.SetLevel(logLevels[l.Level], "")
+			backends = append(backends, consoleLevel)
+		case "file":
+			// file logging
+			_, present := logLevels[l.Level]
+			if !present {
+				log.Fatalln("Unsupported log-level value for logger: ", l.Type, l.Level)
+			}
+			logfile, err := os.OpenFile(l.File, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+			if err != nil {
+				log.Fatalln("Failed to open log file:", err)
+			}
+			fileFmt := logging.MustStringFormatter(
+				`[%{time:2006-01-02 15:04:05.000}] [%{level:.4s}] [%{id:05x}] %{message}`,
+			)
+			file := logging.NewLogBackend(logfile, "", 0)
+			fileFormat := logging.NewBackendFormatter(file, fileFmt)
+			fileLevel := logging.AddModuleLevel(fileFormat)
+			fileLevel.SetLevel(logLevels[l.Level], "")
+			backends = append(backends, fileLevel)
+		case "syslog":
+			// syslog logging
+			_, present := syslogLevels[l.Level]
+			if !present {
+				log.Fatalln("Unsupported log-level value for logger: ", l.Type, l.Level)
+			}
+			syslogLevel, _ := logging.NewSyslogBackendPriority(logger.Module, syslogLevels[l.Level])
+			backends = append(backends, syslogLevel)
+		}
 	}
-	backends = append(backends, consoleLevel)
 
+	// Set the backends to be used.
 	logging.SetBackend(backends...)
 }
 
