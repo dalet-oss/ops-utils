@@ -54,7 +54,7 @@ func Init(name string, loggers []LoggerConfiguration) {
 				log.Fatalln("Unsupported log-level value for logger: ", l.Type, l.Level)
 			}
 			consoleFmt := logging.MustStringFormatter(
-				`%{color} ▶ %{level:.4s} %{id:05x}%{color:reset} %{message}`,
+				`%{color} ▶ [%{level:.4s} %{id:05x}%{color:reset}] %{message}`,
 			)
 			console := logging.NewLogBackend(os.Stdout, "", 0)
 			consoleFormat := logging.NewBackendFormatter(console, consoleFmt)
