@@ -224,14 +224,17 @@ const (
 	RemoteAccessCustomerBastion = "bastion"
 	RemoteAccessRDP             = "rdp"
 
-	ProductGalaxy       = "galaxy"
-	ProductFlex         = "flex"
-	ProductPyramid      = "pyramid"
-	ProductAmberfin     = "amberfin"
-	ProductMediaCortex  = "mediacortex"
-	ProductControlTower = "control-tower"
-	ProductIris         = "iris"
-	ProductAtlas        = "atlas"
+	ProductGalaxy            = "galaxy"
+	ProductFlex              = "flex"
+	ProductPyramid           = "pyramid"
+	ProductAmberfin          = "amberfin"
+	ProductMediaCortex       = "mediacortex"
+	ProductCubeNG            = "cubeng"
+	ProductBrioInStream      = "brio"
+	ProductControlTower      = "control-tower"
+	ProductIris              = "iris"
+	ProductAtlas             = "atlas"
+	ProductKvmVirtualization = "kvirt"
 
 	LicensePerpetual    = "perpetual"
 	LicenseSubscription = "subscription"
@@ -314,9 +317,12 @@ func isSupportedProductName(key string) bool {
 		ProductPyramid,
 		ProductAmberfin,
 		ProductMediaCortex,
+		ProductCubeNG,
+		ProductBrioInStream,
 		ProductControlTower,
 		ProductIris,
-		ProductAtlas:
+		ProductAtlas,
+		ProductKvmVirtualization:
 		return true
 	}
 	return false
