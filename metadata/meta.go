@@ -86,8 +86,6 @@ type PlatformMetadataSecrets struct {
 	SOPSCreatedAtSuffix string                    `yaml:"sops_created_at_suffix,omitempty"`
 	SOPSPublicKeySuffix string                    `yaml:"sops_public_key_suffix,omitempty"`
 	SOPSSecretKeySuffix string                    `yaml:"sops_secret_key_suffix,omitempty"`
-	OsBootstrapUser     string                    `yaml:"os_bootstrap_user,omitempty"`
-	OsBootstrapPrivKey  string                    `yaml:"os_bootstrap_private_key,omitempty"`
 }
 
 // PlatformMetadataSecretsSM contains AWS Secrets Manager related information
@@ -210,8 +208,6 @@ const (
 	SecretsSOPSCreatedAtSuffixDefault = "sops_created_at"
 	SecretsSOPSPublicKeySuffixDefault = "sops_public_key"
 	SecretsSOPSSecretKeySuffixDefault = "sops_secret_key"
-	SecretsOsBootstrapUser            = "os_bootstrap_user"
-	SecretsOsBootstrapPrivKey         = "os_bootstrap_private_key"
 
 	RemoteAccessNetgate         = "netgate"
 	RemoteAccessNetgateNA       = "netgate-na"
