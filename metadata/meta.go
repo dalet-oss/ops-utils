@@ -28,19 +28,12 @@ type PlatformMetadataCustomer struct {
 
 // PlatformMetadataInfra contains infrastructure-specific information
 type PlatformMetadataInfra struct {
-	CostCenter    string                    `yaml:"cc,omitempty"`
-	Provider      string                    `yaml:"provider"`
-	DCH           bool                      `yaml:"dch"`
-	RemoteAccess  string                    `yaml:"remote_access"`
-	RemoteDetails string                    `yaml:"remote_details,omitempty"`
-	Satellite     bool                      `yaml:"satellite"`
-	Bootstrap     PlatformMetadataSSHConfig `yaml:"bootstrap,omitempty"`
-}
-
-// PlatformMetadataSSHConfig contains ssh-related information
-type PlatformMetadataSSHConfig struct {
-	User    string `yaml:"user,omitempty"`
-	KeyFile string `yaml:"key_file,omitempty"`
+	CostCenter    string `yaml:"cc,omitempty"`
+	Provider      string `yaml:"provider"`
+	DCH           bool   `yaml:"dch"`
+	RemoteAccess  string `yaml:"remote_access"`
+	RemoteDetails string `yaml:"remote_details,omitempty"`
+	Satellite     bool   `yaml:"satellite"`
 }
 
 // PlatformMetadataInfraAWS contains AWS-infrastructure specific information
@@ -93,6 +86,8 @@ type PlatformMetadataSecrets struct {
 	SOPSCreatedAtSuffix string                    `yaml:"sops_created_at_suffix,omitempty"`
 	SOPSPublicKeySuffix string                    `yaml:"sops_public_key_suffix,omitempty"`
 	SOPSSecretKeySuffix string                    `yaml:"sops_secret_key_suffix,omitempty"`
+	OsBootstrapUser     string                    `yaml:"os_bootstrap_user,omitempty"`
+	OsBootstrapPrivKey  string                    `yaml:"os_bootstrap_private_key,omitempty"`
 }
 
 // PlatformMetadataSecretsSM contains AWS Secrets Manager related information
@@ -215,6 +210,8 @@ const (
 	SecretsSOPSCreatedAtSuffixDefault = "sops_created_at"
 	SecretsSOPSPublicKeySuffixDefault = "sops_public_key"
 	SecretsSOPSSecretKeySuffixDefault = "sops_secret_key"
+	SecretsOsBootstrapUser            = "os_bootstrap_user"
+	SecretsOsBootstrapPrivKey         = "os_bootstrap_private_key"
 
 	RemoteAccessNetgate         = "netgate"
 	RemoteAccessNetgateNA       = "netgate-na"
