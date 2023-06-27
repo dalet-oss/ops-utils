@@ -1,9 +1,13 @@
 package clog
 
 import (
+	"fmt"
 	"log"
 	"log/syslog"
 	"os"
+	"runtime"
+	"strconv"
+	"strings"
 
 	"github.com/op/go-logging"
 )
@@ -94,24 +98,46 @@ func Init(name string, loggers []LoggerConfiguration) {
 	logging.SetBackend(backends...)
 }
 
+func runtimePC(msg string) string {
+	pc, file, line, ok := runtime.Caller(1)
+	if !ok {
+		return ""
+	}
+
+	filename := file[strings.LastIndex(file, "/")+1:] + ":" + strconv.Itoa(line)
+	funcname := runtime.FuncForPC(pc).Name()
+	fn := funcname[strings.LastIndex(funcname, ".")+1:]
+	return fmt.Sprintf("[%s] %s: %s", filename, fn, msg)
+}
+
+func prependPC(args ...interface{}) string {
+	msg := fmt.Sprint(args...)
+	return runtimePC(msg)
+}
+
+func prependPCf(format string, args ...interface{}) string {
+	msg := fmt.Sprintf(format, args...)
+	return runtimePC(msg)
+}
+
 // Critical logs a simple message when severity is set to CRITICAL or above
 func Critical(args ...interface{}) {
-	logger.Critical(args...)
+	logger.Critical(prependPC(args...))
 }
 
 // Criticalf logs a formatted message when severity is set to CRITICAL or above
 func Criticalf(format string, args ...interface{}) {
-	logger.Criticalf(format, args...)
+	logger.Criticalf(prependPCf(format, args...))
 }
 
 // Error logs a simple message when severity is set to ERROR or above
 func Error(args ...interface{}) {
-	logger.Error(args...)
+	logger.Error(prependPC(args...))
 }
 
 // Errorf logs a formatted message when severity is set to ERROR or above
 func Errorf(format string, args ...interface{}) {
-	logger.Errorf(format, args...)
+	logger.Errorf(prependPCf(format, args...))
 }
 
 // Warning logs a simple message when severity is set to WARNING or above
