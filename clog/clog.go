@@ -107,7 +107,7 @@ func runtimePC(msg string) string {
 	filename := file[strings.LastIndex(file, "/")+1:] + ":" + strconv.Itoa(line)
 	funcname := runtime.FuncForPC(pc).Name()
 	fn := funcname[strings.LastIndex(funcname, ".")+1:]
-	return fmt.Sprintf("[%s] %s: %s", filename, fn, msg)
+	return fmt.Sprintf("[%s][%s()] %s", filename, fn, msg)
 }
 
 func prependPC(args ...interface{}) string {
