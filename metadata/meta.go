@@ -444,7 +444,7 @@ func GetPlatformMetadata(ptf string, contents []byte) (PlatformMetadata, error) 
 	// check for valid configuration
 	err = meta.IsValid(ptf)
 	if err != nil {
-		clog.Error("%s: metadata file seems to be invalid and with unsupported keys/values (%s)", ptf, err)
+		clog.Errorf("%s: metadata file seems to be invalid and with unsupported keys/values (%s)", ptf, err)
 	}
 
 	return meta, nil
