@@ -99,7 +99,7 @@ func Init(name string, loggers []LoggerConfiguration) {
 }
 
 func runtimePC(msg string) string {
-	pc, file, line, ok := runtime.Caller(1)
+	pc, file, line, ok := runtime.Caller(3)
 	if !ok {
 		return ""
 	}
