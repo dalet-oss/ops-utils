@@ -258,7 +258,7 @@ const (
 	TfModuleAWSEKS               = "tf-aws-eks.git"
 	TfModuleAWSEKSFieldName      = "cluster_name"
 	TfModuleAWSEKSFieldVersion   = "cluster_version"
-	TfModuleAWSEKSDefaultVersion = "1.21"
+	TfModuleAWSEKSDefaultVersion = "1.23"
 )
 
 func isSupportedCustomerRegion(key string) bool {
