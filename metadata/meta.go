@@ -9,14 +9,15 @@ import (
 
 // PlatformMetadata is the root definition of a managed platform
 type PlatformMetadata struct {
-	Customer     PlatformMetadataCustomer      `yaml:"customer"`
-	Infra        PlatformMetadataInfra         `yaml:"infra"`
-	AWS          PlatformMetadataInfraAWS      `yaml:"aws,omitempty"`
-	Azure        PlatformMetadataInfraAzure    `yaml:"azure,omitempty"`
-	Requirements PlatformMetadataRequirements  `yaml:"requirements,omitempty"`
-	Product      PlatformMetadataProduct       `yaml:"product"`
-	Secrets      PlatformMetadataSecrets       `yaml:"secrets"`
-	Environments []PlatformMetadataEnvironment `yaml:"environments"`
+	Customer     PlatformMetadataCustomer       `yaml:"customer"`
+	Infra        PlatformMetadataInfra          `yaml:"infra"`
+	AWS          PlatformMetadataInfraAWS       `yaml:"aws,omitempty"`
+	Azure        PlatformMetadataInfraAzure     `yaml:"azure,omitempty"`
+	Kowabunga    PlatformMetadataInfraKowabunga `yaml:"kowabunga,omitempty"`
+	Requirements PlatformMetadataRequirements   `yaml:"requirements,omitempty"`
+	Product      PlatformMetadataProduct        `yaml:"product"`
+	Secrets      PlatformMetadataSecrets        `yaml:"secrets"`
+	Environments []PlatformMetadataEnvironment  `yaml:"environments"`
 }
 
 // PlatformMetadataCustomer contains customer-specific information
@@ -45,6 +46,15 @@ type PlatformMetadataInfraAWS struct {
 // PlatformMetadataInfraAzure contains Azure-infrastructure specific information
 type PlatformMetadataInfraAzure struct {
 	ResourceGroup string `yaml:"resource_group"`
+}
+
+// PlatformMetadataInfraKowabunga contains Kowabunga-infrastructure specific information
+type PlatformMetadataInfraKowabunga struct {
+	Endpoint string `yaml:"endpoint"` // e.g. http://kowabunga.admin.dalet.stg.ops:8080
+	Owner    string `yaml:"owner"`
+	Email    string `yaml:"email"`
+	Region   string `yaml:"region"`
+	Zone     string `yaml:"zone"`
 }
 
 // PlatformMetadataProduct contains product-related information
