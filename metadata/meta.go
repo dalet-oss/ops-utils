@@ -197,12 +197,13 @@ const (
 	RegionEMEA   = "EMEA"
 	RegionAPAC   = "APAC"
 
-	ProviderAWS     = "aws"
-	ProviderAlibaba = "ali"
-	ProviderGoogle  = "gcp"
-	ProviderAzure   = "azure"
-	ProviderOVH     = "ovh"
-	ProviderOnPrem  = "onprem"
+	ProviderAWS       = "aws"
+	ProviderAlibaba   = "ali"
+	ProviderGoogle    = "gcp"
+	ProviderAzure     = "azure"
+	ProviderOVH       = "ovh"
+	ProviderOnPrem    = "onprem"
+	ProviderKowabunga = "kowabunga"
 
 	SecretsVaultKeySuffixDefault      = "ansible_vault"
 	SecretsSOPSCreatedAtSuffixDefault = "sops_created_at"
@@ -281,7 +282,8 @@ func isSupportedInfraProvider(key string) bool {
 		ProviderGoogle,
 		ProviderAzure,
 		ProviderOVH,
-		ProviderOnPrem:
+		ProviderOnPrem,
+		ProviderKowabunga:
 		return true
 	}
 	return false
