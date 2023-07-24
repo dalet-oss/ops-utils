@@ -107,7 +107,7 @@ type PlatformMetadataEnvironment struct {
 	StatusPage  PlatformMetadataEnvironmentStatusPage `yaml:"statuspage,omitempty"`
 	Pagerduty   PlatformMetadataEnvironmentPagerduty  `yaml:"pagerduty"`
 	Kubernetes  PlatformMetadataEnvironmentKubernetes `yaml:"kubernetes,omitempty"`
-	Security    PlatformMetadataEnvironmentSecurity   `yaml:"security"`
+	Security    PlatformMetadataEnvironmentSecurity   `yaml:"security,omitempty"`
 	Flex        PlatformMetadataEnvironmentFlex       `yaml:"flex,omitempty"`
 	Pyramid     PlatformMetadataEnvironmentPyramid    `yaml:"pyramid,omitempty"`
 }
@@ -153,7 +153,7 @@ type PlatformMetadataEnvironmentKubernetesController struct {
 
 // PlatformMetadataEnvironmentSecurity contains environment security related information
 type PlatformMetadataEnvironmentSecurity struct {
-	Log4jCVE bool `yaml:"log4j_cve"`
+	Log4jCVE bool `yaml:"log4j_cve,omitempty"`
 }
 
 // PlatformMetadataEnvironmentFlex contains environment Flex related information
