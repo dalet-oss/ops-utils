@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/dalet-oss/ops-utils/clog"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 // PlatformMetadata is the root definition of a managed platform
