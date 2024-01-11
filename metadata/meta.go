@@ -80,6 +80,7 @@ type PlatformMetadataRequirements struct {
 // PlatformMetadataRequirementsAnsible contains Ansible-related information
 type PlatformMetadataRequirementsAnsible struct {
 	MinVersion string `yaml:"min_version,omitempty"`
+	Version    string `yaml:"version,omitempty"`
 }
 
 // PlatformMetadataRequirementsTF contains Terraform-related information
