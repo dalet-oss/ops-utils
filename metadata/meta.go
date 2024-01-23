@@ -29,12 +29,19 @@ type PlatformMetadataCustomer struct {
 
 // PlatformMetadataInfra contains infrastructure-specific information
 type PlatformMetadataInfra struct {
-	CostCenter    string `yaml:"cc,omitempty"`
-	Provider      string `yaml:"provider"`
-	DCH           bool   `yaml:"dch"`
-	RemoteAccess  string `yaml:"remote_access"`
-	RemoteDetails string `yaml:"remote_details,omitempty"`
-	Satellite     bool   `yaml:"satellite"`
+	CostCenter    string                    `yaml:"cc,omitempty"`
+	Cost          PlatformMetadataInfraCost `yaml:"cost,omitempty"`
+	Provider      string                    `yaml:"provider"`
+	DCH           bool                      `yaml:"dch"`
+	RemoteAccess  string                    `yaml:"remote_access"`
+	RemoteDetails string                    `yaml:"remote_details,omitempty"`
+	Satellite     bool                      `yaml:"satellite"`
+}
+
+// PlatformMetadataInfra contains infrastructure-specific information
+type PlatformMetadataInfraCost struct {
+	Price    float64 `yaml:"price"`
+	Currency string  `yaml:"currency"`
 }
 
 // PlatformMetadataInfraAWS contains AWS-infrastructure specific information
