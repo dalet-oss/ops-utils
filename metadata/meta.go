@@ -133,7 +133,7 @@ type PlatformMetadataEnvironment struct {
 
 // PlatformMetadataEnvironmentFQDN contains public domain information
 type PlatformMetadataEnvironmentFQDN struct {
-	Realm  string `yaml:"realm"`
+	Prefix string `yaml:"prefix"`
 	Domain string `yaml:"domain"`
 }
 
