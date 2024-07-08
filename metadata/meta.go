@@ -120,6 +120,7 @@ type PlatformMetadataEnvironment struct {
 	Description string                                `yaml:"description"`
 	Active      bool                                  `yaml:"active"`
 	Version     string                                `yaml:"version"`
+	FQDN        PlatformMetadataEnvironmentFQDN       `yaml:"fqdn,omitempty"`
 	OS          PlatformMetadataEnvironmentOS         `yaml:"os"`
 	Inventory   PlatformMetadataEnvironmentInventory  `yaml:"inventory"`
 	StatusPage  PlatformMetadataEnvironmentStatusPage `yaml:"statuspage,omitempty"`
@@ -128,6 +129,12 @@ type PlatformMetadataEnvironment struct {
 	Security    PlatformMetadataEnvironmentSecurity   `yaml:"security,omitempty"`
 	Flex        PlatformMetadataEnvironmentFlex       `yaml:"flex,omitempty"`
 	Pyramid     PlatformMetadataEnvironmentPyramid    `yaml:"pyramid,omitempty"`
+}
+
+// PlatformMetadataEnvironmentFQDN contains public domain information
+type PlatformMetadataEnvironmentFQDN struct {
+	Realm  string `yaml:"realm"`
+	Domain string `yaml:"domain"`
 }
 
 // PlatformMetadataEnvironmentOS contains Operating system related information
