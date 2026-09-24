@@ -283,6 +283,7 @@ const (
 	KubernetesTypeGKE   = "gke"
 	KubernetesTypeOKS   = "oks"
 	KubernetesTypeAtlas = "atlas"
+	KubernetesTypeOpenShift = "openshift"
 )
 
 const (
