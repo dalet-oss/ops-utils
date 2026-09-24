@@ -82,6 +82,7 @@ type PlatformMetadataProductMonitored struct {
 type PlatformMetadataRequirements struct {
 	Ansible PlatformMetadataRequirementsAnsible `yaml:"ansible,omitempty"`
 	TF      PlatformMetadataRequirementsTF      `yaml:"terraform,omitempty"`
+        Helm    PlatformMetadataRequirementsHelm    `yaml:"helm,omitempty"`
 }
 
 // PlatformMetadataRequirementsAnsible contains Ansible-related information
@@ -92,6 +93,11 @@ type PlatformMetadataRequirementsAnsible struct {
 
 // PlatformMetadataRequirementsTF contains Terraform-related information
 type PlatformMetadataRequirementsTF struct {
+	Version string `yaml:"version,omitempty"`
+}
+
+// PlatformMetadataRequirementsHelm contains Helm-related information
+type PlatformMetadataRequirementsHelm struct {
 	Version string `yaml:"version,omitempty"`
 }
 
