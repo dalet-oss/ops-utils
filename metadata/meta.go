@@ -410,7 +410,8 @@ func isSupportedKubernetesProvider(key string) bool {
 		KubernetesTypeAKS,
 		KubernetesTypeGKE,
 		KubernetesTypeOKS,
-		KubernetesTypeAtlas:
+		KubernetesTypeAtlas,
+		KubernetesTypeOpenShift:
 		return true
 	}
 	return false
