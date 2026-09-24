@@ -82,7 +82,7 @@ type PlatformMetadataProductMonitored struct {
 type PlatformMetadataRequirements struct {
 	Ansible PlatformMetadataRequirementsAnsible `yaml:"ansible,omitempty"`
 	TF      PlatformMetadataRequirementsTF      `yaml:"terraform,omitempty"`
-        Helm    PlatformMetadataRequirementsHelm    `yaml:"helm,omitempty"`
+	Helm    PlatformMetadataRequirementsHelm    `yaml:"helm,omitempty"`
 }
 
 // PlatformMetadataRequirementsAnsible contains Ansible-related information
@@ -276,13 +276,13 @@ const (
 	OsNameCentos = "Centos"
 	OsNameAmazon = "AmazonLinux2"
 
-	KubernetesTypeAuto  = "auto"
-	KubernetesTypeEKS   = "eks"
-	KubernetesTypeACK   = "ack"
-	KubernetesTypeAKS   = "aks"
-	KubernetesTypeGKE   = "gke"
-	KubernetesTypeOKS   = "oks"
-	KubernetesTypeAtlas = "atlas"
+	KubernetesTypeAuto      = "auto"
+	KubernetesTypeEKS       = "eks"
+	KubernetesTypeACK       = "ack"
+	KubernetesTypeAKS       = "aks"
+	KubernetesTypeGKE       = "gke"
+	KubernetesTypeOKS       = "oks"
+	KubernetesTypeAtlas     = "atlas"
 	KubernetesTypeOpenShift = "openshift"
 )
 
