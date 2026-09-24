@@ -235,6 +235,7 @@ const (
 	ProviderOVH       = "ovh"
 	ProviderOnPrem    = "onprem"
 	ProviderKowabunga = "kowabunga"
+	ProviderOpenShift = "openshift"
 
 	SecretsVaultKeySuffixDefault      = "ansible_vault"
 	SecretsSOPSCreatedAtSuffixDefault = "sops_created_at"
